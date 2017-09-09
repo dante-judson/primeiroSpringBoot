@@ -18,22 +18,29 @@
 		</div>
 
 		<div class="panel-body">
+		
+		<div th:if="${mensagem != null}" class = "alert alert-success">
+			<div th:text="${mensagem}"></div>
+		</div>
+		
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>Nome</th>
 						<th>Acompanhantes</th>
+						<th>Excluir</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="convidado:${convidados}">
 						<td th:text="${convidado.nome}"></td>
 						<td th:text="${convidado.qtdAcompanhantes}"></td>
+						<td> <a th:href="@{'/remove/'+${convidado.id}}" class="glyphicon glyphicon-trash" style="color: black"></a> </td>
 					</tr>
 				</tbody>
 			</table>
 
-			<form class="form-inline" method="POST" th:object="${convidado}" th:action="@{/convidados}" style="margin: 20px 0">
+			<form class="form-inline" method="POST" th:object="${convidado}" th:action="@{/}" style="margin: 20px 0">
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"/> 
 					<input type="text" class="form-control" placeholder="Acompanhantes" th:field="*{qtdAcompanhantes}" />
